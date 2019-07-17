@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.flowable.org/processdef">
+  <process id="consensus" name="consensus" isExecutable="true">
+    <startEvent id="startEvent1"></startEvent>
+    <userTask id="dept-consensus" name="部门会签">
+      <multiInstanceLoopCharacteristics>
+        <loopCardinality>3</loopCardinality>
+      </multiInstanceLoopCharacteristics>
+    </userTask>
+    <sequenceFlow id="sid-76CFD7CB-01B4-4248-BD32-C69B84370971" sourceRef="startEvent1" targetRef="dept-consensus"></sequenceFlow>
+    <endEvent id="sid-92CF8B5D-F7B7-4E10-B49A-A762F32D3955"></endEvent>
+    <sequenceFlow id="sid-012834B6-CDBC-4577-8122-96B1BE7D6F7C" sourceRef="dept-consensus" targetRef="sid-92CF8B5D-F7B7-4E10-B49A-A762F32D3955"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_consensus">
+    <bpmndi:BPMNPlane bpmnElement="consensus" id="BPMNPlane_consensus">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="100.0" y="163.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="dept-consensus" id="BPMNShape_dept-consensus">
+        <omgdc:Bounds height="80.0" width="100.0" x="175.0" y="138.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-92CF8B5D-F7B7-4E10-B49A-A762F32D3955" id="BPMNShape_sid-92CF8B5D-F7B7-4E10-B49A-A762F32D3955">
+        <omgdc:Bounds height="28.0" width="28.0" x="320.0" y="164.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-76CFD7CB-01B4-4248-BD32-C69B84370971" id="BPMNEdge_sid-76CFD7CB-01B4-4248-BD32-C69B84370971">
+        <omgdi:waypoint x="129.9499984899576" y="178.0"></omgdi:waypoint>
+        <omgdi:waypoint x="174.9999999999917" y="178.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-012834B6-CDBC-4577-8122-96B1BE7D6F7C" id="BPMNEdge_sid-012834B6-CDBC-4577-8122-96B1BE7D6F7C">
+        <omgdi:waypoint x="274.95000000000005" y="178.0"></omgdi:waypoint>
+        <omgdi:waypoint x="320.0" y="178.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
