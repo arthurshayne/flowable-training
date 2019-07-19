@@ -43,7 +43,7 @@ public class Lession2Tests {
         List<Task> tasks = taskService.createTaskQuery().processInstanceId(pi.getProcessInstanceId()).list();
 
         for (Task task : tasks) {
-            taskService.complete(task.getId());
+            complete(task.getId());
         }
     }
 
@@ -54,19 +54,19 @@ public class Lession2Tests {
 
         // 完成【开车到4S店】
         Task task = taskService.createTaskQuery().processInstanceId(pi.getProcessInstanceId()).singleResult();
-        taskService.complete(task.getId());
+        complete(task.getId());
 
 
         // 完成 【车去保养】
         List<Task> tasks = taskService.createTaskQuery().processInstanceId(pi.getProcessInstanceId()).list();
-        taskService.complete(tasks.stream().filter(p -> "车去保养".equals(p.getName())).findFirst().get().getId());
+        complete(tasks.stream().filter(p -> "车去保养".equals(p.getName())).findFirst().get().getId());
 
         // 完成 【我去玩耍】
-        taskService.complete(tasks.stream().filter(p -> "我去玩耍".equals(p.getName())).findFirst().get().getId());
+        complete(tasks.stream().filter(p -> "我去玩耍".equals(p.getName())).findFirst().get().getId());
 
         // 完成【开车回家】
         task = taskService.createTaskQuery().processInstanceId(pi.getProcessInstanceId()).singleResult();
-        taskService.complete(task.getId());
+        complete(task.getId());
     }
 
     @Test
@@ -76,11 +76,11 @@ public class Lession2Tests {
 
         // 完成【主流】
         Task task = taskService.createTaskQuery().processInstanceId(pi.getProcessInstanceId()).singleResult();
-        taskService.complete(task.getId());
+        complete(task.getId());
 
         // 完成【非主流】
         task = taskService.createTaskQuery().processInstanceId(pi.getProcessInstanceId()).singleResult();
-        taskService.complete(task.getId());
+        complete(task.getId());
     }
 
     @Test
@@ -91,22 +91,17 @@ public class Lession2Tests {
 
         // 完成【大主流】
         Task task = taskService.createTaskQuery().processInstanceId(pi.getProcessInstanceId()).singleResult();
-        taskService.complete(task.getId());
+        complete(task.getId());
 
         ProcessInstance subpi = runtimeService.createProcessInstanceQuery().superProcessInstanceId(pi.getProcessInstanceId()).singleResult();
 
         // 完成【主流】
         task = taskService.createTaskQuery().processInstanceId(subpi.getProcessInstanceId()).singleResult();
-        taskService.complete(task.getId());
+        complete(task.getId());
 
         // 完成【非主流】
         task = taskService.createTaskQuery().processInstanceId(subpi.getProcessInstanceId()).singleResult();
-        taskService.complete(task.getId());
-    }
-
-    @Test
-    public void claim() {
-        taskService.claim("22e2f944-5a7e-11e9-82c4-f48c508a7d6c", "assingeem");
+        complete(task.getId());
     }
 
     private void deploy(String classPathResource) {

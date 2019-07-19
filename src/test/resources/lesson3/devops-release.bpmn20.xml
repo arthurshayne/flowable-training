@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:flowable="http://flowable.org/bpmn"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.flowable.org/processdef">
+  <signal id="build_success" name="build_success" flowable:scope="global"></signal>
+  <process id="devops-release" name="devops-release" isExecutable="true">
+    <startEvent id="sid-FD0AC5BF-993A-4909-9927-BFF880B3FD04" isInterrupting="true">
+      <signalEventDefinition signalRef="build_success"></signalEventDefinition>
+    </startEvent>
+    <userTask id="sid-316C9B42-D33E-4DAA-B9FD-B2E4EDB4E311" name="人工审核"></userTask>
+    <sequenceFlow id="sid-EAAA28EA-D0E7-4BF9-9C02-1CF252E98CAC" sourceRef="sid-FD0AC5BF-993A-4909-9927-BFF880B3FD04" targetRef="sid-316C9B42-D33E-4DAA-B9FD-B2E4EDB4E311"></sequenceFlow>
+    <serviceTask id="sid-8C7D3449-69D7-4326-B872-8FF65F298636" name="发布" flowable:type="shell">
+      <extensionElements>
+        <flowable:field name="command">
+          <flowable:string><![CDATA[cmd]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="arg1">
+          <flowable:string><![CDATA[/c]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="arg2">
+          <flowable:string><![CDATA[echo]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="arg3">
+          <flowable:string><![CDATA[Releasing]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="wait">
+          <flowable:string><![CDATA[true]]></flowable:string>
+        </flowable:field>
+        <flowable:field name="outputVariable" stringValue="resultVar" />
+        <flowable:field name="errorCodeVariable" stringValue="errorCode" />
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-109E2E7C-7567-4059-8D0B-C3ED47F11967" sourceRef="sid-316C9B42-D33E-4DAA-B9FD-B2E4EDB4E311" targetRef="sid-8C7D3449-69D7-4326-B872-8FF65F298636"></sequenceFlow>
+    <endEvent id="sid-F3C4B66E-4FC0-4E2F-B8A9-6E89FD7FE0D5"></endEvent>
+    <sequenceFlow id="sid-9496DE45-272F-4512-ACCF-CC446562F13D" sourceRef="sid-8C7D3449-69D7-4326-B872-8FF65F298636" targetRef="sid-F3C4B66E-4FC0-4E2F-B8A9-6E89FD7FE0D5"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_devops-release">
+    <bpmndi:BPMNPlane bpmnElement="devops-release" id="BPMNPlane_devops-release">
+      <bpmndi:BPMNShape bpmnElement="sid-FD0AC5BF-993A-4909-9927-BFF880B3FD04" id="BPMNShape_sid-FD0AC5BF-993A-4909-9927-BFF880B3FD04">
+        <omgdc:Bounds height="30.0" width="30.0" x="150.0" y="180.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-316C9B42-D33E-4DAA-B9FD-B2E4EDB4E311" id="BPMNShape_sid-316C9B42-D33E-4DAA-B9FD-B2E4EDB4E311">
+        <omgdc:Bounds height="80.0" width="100.0" x="225.0" y="155.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-8C7D3449-69D7-4326-B872-8FF65F298636" id="BPMNShape_sid-8C7D3449-69D7-4326-B872-8FF65F298636">
+        <omgdc:Bounds height="80.0" width="100.0" x="435.0" y="155.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-F3C4B66E-4FC0-4E2F-B8A9-6E89FD7FE0D5" id="BPMNShape_sid-F3C4B66E-4FC0-4E2F-B8A9-6E89FD7FE0D5">
+        <omgdc:Bounds height="28.0" width="28.0" x="660.0" y="181.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-EAAA28EA-D0E7-4BF9-9C02-1CF252E98CAC" id="BPMNEdge_sid-EAAA28EA-D0E7-4BF9-9C02-1CF252E98CAC">
+        <omgdi:waypoint x="179.94999848995764" y="195.0"></omgdi:waypoint>
+        <omgdi:waypoint x="225.0" y="195.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-9496DE45-272F-4512-ACCF-CC446562F13D" id="BPMNEdge_sid-9496DE45-272F-4512-ACCF-CC446562F13D">
+        <omgdi:waypoint x="534.9499999999581" y="195.0"></omgdi:waypoint>
+        <omgdi:waypoint x="660.0" y="195.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-109E2E7C-7567-4059-8D0B-C3ED47F11967" id="BPMNEdge_sid-109E2E7C-7567-4059-8D0B-C3ED47F11967">
+        <omgdi:waypoint x="324.94999999995036" y="195.0"></omgdi:waypoint>
+        <omgdi:waypoint x="434.99999999999704" y="195.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
